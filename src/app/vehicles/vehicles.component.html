@@ -1,0 +1,92 @@
+<h2>Vehicles</h2>
+<div class="search">
+  <label for="vehicle-marka">Vehicle marka: </label>
+  <input type="text" #vehicleMarka id="vehicle-marka"> <br>
+  <label for="vehicle-model">Vehicle model: </label>
+  <input type="text" #vehicleModel id="vehicle-model"> <br>
+  <label for="vehicle-cena">Vehicle cena: </label>
+  <input type="text" #vehicleCena id="vehicle-cena"> <br>
+  <label for="vehicle-rocznik">Vehicle rocznik: </label>
+  <input type="text" #vehicleRocznik id="vehicle-rocznik"> <br>
+  <label for="vehicle-rodzaj">Vehicle rodzaj paliwa: </label>
+  <input type="text" #vehicleRodzajPaliwa id="vehicle-rodzaj"> <br>
+  <label for="vehicle-przebieg">Vehicle przebieg: </label>
+  <input type="text" #vehiclePrzebieg id="vehicle-przebieg"> <br>
+  <label for="vehicle-pojemnosc">Vehicle pojemnosc: </label>
+  <input type="text" #vehiclePojemnosc id="vehicle-pojemnosc"> <br>
+
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(
+    vehicleMarka.value,
+    vehicleModel.value,
+    vehicleCena.value,
+    vehicleRocznik.value,
+    vehicleRodzajPaliwa.value,
+    vehiclePrzebieg.value,
+    vehiclePojemnosc.value
+    ); 
+    vehicleMarka.value='';
+    vehicleModel.value='';
+    vehicleCena.value='';
+    vehicleRocznik.value='';
+    vehicleRodzajPaliwa.value='';
+    vehiclePrzebieg.value='';
+    vehiclePojemnosc.value=''
+  ">
+    Add vehicle
+  </button>
+</div>
+
+<ul class="vehicles">
+    <li *ngFor="let vehicle of vehicles">
+      <a (click)="edit(vehicle)">
+        <span class="params">Id: </span> <span>{{vehicle.id}} </span>
+        <span class="params">Marka: </span> <span *ngIf="vehicle!==editVehicle">{{vehicle.marka}} </span>
+        <input type="text"
+              class="edit-input"
+             *ngIf="vehicle===editVehicle"
+             [(ngModel)]="vehicle.marka"
+             (keyup.enter)="update()">
+        <span class="params">Model: </span> <span *ngIf="vehicle!==editVehicle">{{vehicle.model}} </span>
+        <input type="text"
+            class="edit-input"
+             *ngIf="vehicle===editVehicle"
+             [(ngModel)]="vehicle.model"
+             (keyup.enter)="update()">
+        <span class="params">Cena: </span> <span *ngIf="vehicle!==editVehicle">{{vehicle.cenaPLN}} </span>
+        <input type="text"
+            class="edit-input"
+             *ngIf="vehicle===editVehicle"
+             [(ngModel)]="vehicle.cenaPLN"
+             (keyup.enter)="update()">
+        <span class="params">Rocznik: </span> <span *ngIf="vehicle!==editVehicle">{{vehicle.rocznik}} </span>
+        <input type="text"
+            class="edit-input"
+             *ngIf="vehicle===editVehicle"
+             [(ngModel)]="vehicle.rocznik"
+             (keyup.enter)="update()">
+        <span class="params">Rodzaj paliwa: </span> <span *ngIf="vehicle!==editVehicle">{{vehicle.rodzajPaliwa}} </span>
+        <input type="text"
+            class="edit-input"
+             *ngIf="vehicle===editVehicle"
+             [(ngModel)]="vehicle.rodzajPaliwa"
+             (keyup.enter)="update()">
+        <span class="params">Przebieg: </span> <span *ngIf="vehicle!==editVehicle">{{vehicle.przebiegKM}} </span>
+        <input type="text"
+            class="edit-input"
+             *ngIf="vehicle===editVehicle"
+             [(ngModel)]="vehicle.przebiegKM"
+             (keyup.enter)="update()">
+        <span class="params">Pojemność: </span> <span *ngIf="vehicle!==editVehicle">{{vehicle.pojemnoscCm3}} </span>
+        <input type="text"
+            class="edit-input"
+            *ngIf="vehicle===editVehicle"
+            [(ngModel)]="vehicle.pojemnoscCm3"
+            (keyup.enter)="update()">
+      </a>
+      <button class="update" title="update vehicle"
+          (click)="update()">Aktualizuj</button>
+      <button class="delete" title="delete vehicle"
+          (click)="delete(vehicle)">x</button>
+    </li>
+</ul>
